@@ -20,7 +20,7 @@ modules:
   - type: dnf
     repos:
       files:
-        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_RELEASE%/anda/terra/release/terra.repo
+        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra.repo
     install:
       packages:
         - terra-gpg-keys
@@ -33,7 +33,7 @@ modules:
     repos:
       files:
         - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
-        - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_RELEASE%/home:mkittler.repo
+        - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
         - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
         - https://www.scootersoftware.com/scootersoftware.repo
       nonfree: rpmfusion
