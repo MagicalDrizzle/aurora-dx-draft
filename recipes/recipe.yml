@@ -24,14 +24,14 @@ modules:
     install:
       no-gpgpchecks: true
       packages:
-        - terra-release
-        - terra-release-extras
-        - terra-release-mesa
+        - terra-gpg-keys
 
   - type: dnf
     install:
       packages:
-        - terra-gpg-keys
+        - terra-release
+        - terra-release-extras
+        - terra-release-mesa
         - adoptium-temurin-java-repository
 
   - type: dnf
