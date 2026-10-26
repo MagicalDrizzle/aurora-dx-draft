@@ -17,14 +17,9 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  - type: dnf
-    repos:
-      files:
-        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra.repo
-    install:
-      no-gpgpchecks: true
-      packages:
-        - terra-gpg-keys
+  - type: script
+    snippets:
+      - "dnf5 -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release terra-gpg-keys"
 
   - type: dnf
     install:
