@@ -11,7 +11,7 @@ curl_gh() {
 # Hermes
 kver="$(rpm -q --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}\n' kernel-core | sort -V | tail -n1)"
 dnf5 -y install "$(curl_gh https://api.github.com/repos/MrOz59/Hermes/releases \
-    | jq -r --arg ver "$(rpm -E %fedora)" '[.[0].assets[].browser_download_url] |
+    | jq -r --arg ver "$OS_VERSION" '[.[0].assets[].browser_download_url] |
     (map(select(contains(".fc" + $ver))).[0]) // (map(select(contains(".fc"))) | sort[-1])')"
 
 # Hermes-KMS
