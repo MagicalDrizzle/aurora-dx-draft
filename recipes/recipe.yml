@@ -34,9 +34,13 @@ modules:
         - terra-gpg-keys
         - adoptium-temurin-java-repository
 
-  - type: script
-    snippets:
-      - "dnf5 -y config-manager enable adoptium-temurin-java-repository terra terra-extras terra-mesa"
+  - type: dnf
+    repos:
+      enable:
+        - adoptium-temurin-java-repository
+        - terra
+        - terra-extras
+        - terra-mesa
 
   - type: dnf
     repos:
@@ -82,7 +86,9 @@ modules:
 
         - bcompare
         - rstudio
-        - nohang-nightly
+        # Remember to delete when merged
+        - nohang
+        - nohang-desktop
 
         - gsmartcontrol
         - btrfs-heatmap
@@ -119,10 +125,17 @@ modules:
     scripts:
       - bcompare.sh
       - customization.sh
-    snippets:
-      - "dnf5 -y config-manager disable virtio-win-stable virtio-win-latest virtio-win-source home_mkittler scootersoftware r_tools_ppa" # copr:copr.fedorainfracloud.org:faugus:faugus-launcher
-      - "dnf5 -y remove nohang-nightly-desktop"
-      - "dnf5 -y install --skip-unavailable nohang-nightly-desktop"
+
+  - type: dnf
+    repos:
+      disable:
+        - virtio-win-stable
+        - virtio-win-latest
+        - virtio-win-source
+        - home_mkittler
+        - scootersoftware
+        - r_tools_ppa
+      # - copr:copr.fedorainfracloud.org:faugus:faugus-launcher
 
   - type: script
     secrets:
