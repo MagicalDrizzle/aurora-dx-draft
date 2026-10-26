@@ -14,22 +14,25 @@ def repos [$repos: record]: nothing -> record {
   let repos = $repos
     | default [] keys
   # Enable and disable repos
-  {
-    enable: [..$enable]
-    disable: [..$disable]
-  } => {
-    let repos = enable_repos ($enable | default [])
-    disable_repos ($disable | default [])
-    $repos
-  }
-  # Enable repos
-  { enable: [..$enable] } => {
-    enable_repos ($enable | default [])
-  }
-  # Disable repos
-  { disable: [..$disable] } => {
-    disable_repos ($disable | default [])
-    []
+  match $repos {
+    {
+      enable: [..$enable]
+      disable: [..$disable]
+    } => {
+      let repos = enable_repos ($enable | default [])
+      disable_repos ($disable | default [])
+      $repos
+    }
+    # Enable repos
+    { enable: [..$enable] } => {
+      enable_repos ($enable | default [])
+    }
+    # Disable repos
+    { disable: [..$disable] } => {
+      disable_repos ($disable | default [])
+      []
+    }
+    _ => {}
   }
 
   let cleanup_repos = match $repos.files? {
@@ -322,7 +325,6 @@ def enable_repos [$repos: list]: nothing -> nothing {
           })
           $repo
       }
-      dnf config-manager enable $repos
     }
     dnf config-manager enable $repos
   }
