@@ -38,11 +38,11 @@ modules:
     repos:
       files:
         add:
-          - fedora-cisco-openh264
           - terra
           - terra-extras
           - terra-mesa
           - adoptium-temurin-java-repository
+          - fedora-cisco-openh264
           - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
           - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
           - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
