@@ -34,7 +34,7 @@ modules:
         - terra-gpg-keys
         - adoptium-temurin-java-repository
 
-  - type: dnf
+  - type: dnf-fork
     repos:
       enable:
         - adoptium-temurin-java-repository
@@ -126,7 +126,7 @@ modules:
       - bcompare.sh
       - customization.sh
 
-  - type: dnf
+  - type: dnf-fork
     repos:
       disable:
         - virtio-win-stable
