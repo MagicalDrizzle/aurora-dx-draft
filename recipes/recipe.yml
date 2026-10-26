@@ -22,11 +22,19 @@ modules:
       files:
         - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra.repo
     install:
+      no-gpgpchecks: true
       packages:
-        - terra-gpg-keys
         - terra-release
         - terra-release-extras
         - terra-release-mesa
+
+  - type: dnf
+    repos:
+      files:
+        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra.repo
+    install:
+      packages:
+        - terra-gpg-keys
         - adoptium-temurin-java-repository
 
   - type: dnf
