@@ -17,18 +17,30 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+  - type: dnf
+    repos:
+      files:
+        - https://www.scootersoftware.com/scootersoftware.repo
+    install:
+      packages:
+        - bcompare
+
+  - type: script
+    scripts:
+      - bcompare.sh
+
   - type: script
     secrets:
       - type: env
         name: SB_KEY
         mount:
           type: file
-          destination: /run/secrets/SB_KEY
+          destination: /tmp/SB_KEY
       - type: env
         name: SB_CERT
         mount:
           type: file
-          destination: /run/secrets/SB_CERT
+          destination: /tmp/SB_CERT
       - type: env
         name: GH_TOKEN
         mount:

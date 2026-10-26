@@ -52,7 +52,7 @@ git clone https://github.com/MrOz59/Hermes-KMS.git --single-branch \
 cd /tmp/hermes-kms
 make modules KERNELRELEASE="${kver}" KDIR="/usr/lib/modules/${kver}/build" && \
 make modules-install KERNELRELEASE="${kver}" DESTDIR=/
-"/usr/lib/modules/${kver}/build/scripts/sign-file" sha512 /run/secrets/SB_KEY /run/secrets/SB_CERT \
+"/usr/lib/modules/${kver}/build/scripts/sign-file" sha512 /tmp/SB_KEY /tmp/SB_CERT \
     /usr/lib/modules/${kver}/extra/hermes-kms/hermes_kms.ko
 
 ### Gaming (Steam flatpak)
@@ -78,18 +78,6 @@ fi
 # RStudio
 RS=$(curl_gh https://api.github.com/repos/rstudio/rstudio/tags | jq -r '.[0].name') && RS_VER=${RS:1}
 dnf5 -y install https://download1.rstudio.org/electron/rhel9/x86_64/rstudio-"${RS_VER/+/-}"-x86_64.rpm
-
-# Beyond Compare
-dnf5 config-manager addrepo --from-repofile=https://www.scootersoftware.com/scootersoftware.repo
-dnf5 config-manager disable scootersoftware
-if dnf5 -y install bcompare --from-repo=scootersoftware; then
-    sed -i 's/p1+wk/pn+wk/g' /usr/lib64/beyondcompare/BCompare
-    git clone https://github.com/garfield-ts/BCompare_Keygen.git /tmp/bc_keygen
-    python -m venv /tmp/bc_venv && source /tmp/bc_venv/bin/activate
-    pip3 install base58==2.1.1 pycryptodome==3.24.0
-    python /tmp/bc_keygen/keygen.py -u Mizuki -c innerworld -s 4462-6498 -n 4464 | tee /usr/lib64/beyondcompare/BC5Key.txt
-    deactivate
-fi
 
 # VirtIO paravirtualization drivers for Windows
 dnf5 config-manager addrepo --from-repofile=https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
