@@ -4,3 +4,4 @@ cosign.private
 *.iso
 *.iso-CHECKSUM
 *.kate-swp
+/.bluebuild-scripts_*

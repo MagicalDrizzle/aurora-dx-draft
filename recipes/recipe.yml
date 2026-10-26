@@ -38,7 +38,7 @@ modules:
     source: local
     repos:
       enable:
-        - adoptium-temurin-java-repository
+        - https://www.scootersoftware.com/scootersoftware.repo
         - terra
         - terra-extras
         - terra-mesa
