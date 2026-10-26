@@ -35,6 +35,7 @@ modules:
         - adoptium-temurin-java-repository
 
   - type: dnf-fork
+    source: local
     repos:
       enable:
         - adoptium-temurin-java-repository
@@ -127,6 +128,7 @@ modules:
       - customization.sh
 
   - type: dnf-fork
+    source: local
     repos:
       disable:
         - virtio-win-stable
