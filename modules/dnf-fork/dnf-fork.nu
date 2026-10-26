@@ -314,17 +314,13 @@ def enable_repos [$repos: list]: nothing -> nothing {
       | each {
         print $'- (ansi cyan)($in)(ansi reset)'
       }
-    for $repo in $repos {
-      let repo = if ($repo | str starts-with 'https://') or ($repo | str starts-with 'http://') {
-          return (error make {
-            msg: $"(ansi red)This module only support enabling installed repos, not online repos: (ansi cyan)'($repo)'(ansi reset)"
-            label: {
-              span: (metadata $repo).span
-              text: 'Found in config'
-            }
-          })
-      }
-    }
+#    for $repo in $repos {
+#      if ($repo | str starts-with 'https://') or ($repo | str starts-with 'http://') {
+#          return (error make {
+#            msg: $"(ansi red)This module only support enabling installed repos, not online repos: (ansi cyan)'($repo)'(ansi reset)"
+#          })
+#      }
+#    }
     dnf config-manager enable ...$repos
   }
 }
