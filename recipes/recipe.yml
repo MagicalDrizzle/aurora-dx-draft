@@ -36,17 +36,15 @@ modules:
 
   - type: dnf
     repos:
-      add:
-        - terra
-        - terra-extras
-        - terra-mesa
-        - adoptium-temurin-java-repository
-        - fedora-cisco-openh264
       files:
+        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra.repo
+        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra-extras.repo
+        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra-mesa.repo
         - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
         - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
         - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
         - https://www.scootersoftware.com/scootersoftware.repo
+        - https://src.fedoraproject.org/rpms/adoptium-temurin-java-repository/raw/f%OS_VERSION%/f/adoptium-temurin-java-repository.repo
       nonfree: rpmfusion
       copr:
         - cuteneko/waydroid-helper
