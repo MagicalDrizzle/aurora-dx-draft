@@ -20,14 +20,94 @@ modules:
   - type: dnf
     repos:
       files:
-        - https://www.scootersoftware.com/scootersoftware.repo
+        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_RELEASE%/anda/terra/release/terra.repo
     install:
       packages:
+        - terra-gpg-keys
+        - terra-release
+        - terra-release-extras
+        - terra-release-mesa
+        - adoptium-temurin-java-repository
+
+  - type: dnf
+    repos:
+      files:
+        - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
+        - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_RELEASE%/home:mkittler.repo
+        - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
+        - https://www.scootersoftware.com/scootersoftware.repo
+      nonfree: rpmfusion
+      copr:
+        - cuteneko/waydroid-helper
+    remove:
+      packages:
+        - Sunshine
+    replace:
+      - from-repo: terra-extras
+        packages:
+          - old: ddcutil
+          - new: terra-ddcutil
+    install:
+      packages:
+        - gamescope
+        - scopebuddy
+
+        - temurin-25-jdk
+        - micro
+        - python-proton-vpn-cli
+        - proton-vpn-qt-app
+        - coolercontrol
+        - coolercontrold
+        - waydroid
+        - waydroid-helper
+
+        - syncthingtray-qt6
+        - syncthingplasmoid-qt6
+        - syncthingfileitemaction-qt6
+        - syncthingctl-qt6
+
         - bcompare
+        - rstudio
+        - nohang-nightly
+
+        - gsmartcontrol
+        - btrfs-heatmap
+        - btrfsmaintenance
+        - mmc-utils
+        - cmospwd
+        - byebyebios
+        - efivar
+        - pesign
+        - sbsigntools
+        - smbios-utils
+        - coreboot-utils-all
+        - usbview
+        - playerctl
+        - gparted
+        - golly
+        - ucblogo
+        - vkmark
+        - below
+        - firejail
+        - hardinfo2
+        - lxqt-admin
+        - pcmanfm-qt
+        - zswap-cli
+        - qt5ct
+        - qt6ct
+        - accessibility-inspector
+        - android-udev-rules
+        - chkconfig
+        - cpuinfo
+
 
   - type: script
     scripts:
       - bcompare.sh
+      - customization.sh
+    snippets:
+      - "dnf5 -y remove nohang-nightly-desktop"
+      - "dnf5 -y install --skip-unavailable nohang-nightly-desktop"
 
   - type: script
     secrets:
@@ -47,6 +127,18 @@ modules:
           type: env
           name: GH_TOKEN
     scripts:
-      - build.sh
+      - hermes.sh # Install Hermes and Hermes-KMS
+
+  - type: systemd
+    system:
+      masked:
+        - systemd-oomd.service
+      enabled:
+        - coolercontrold.service
+        - nohang-desktop.service
+        - podman.socket
+    user:
+      enabled:
+        - hermes.service
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
