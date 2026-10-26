@@ -34,6 +34,10 @@ modules:
         - terra-gpg-keys
         - adoptium-temurin-java-repository
 
+  - type: script
+    snippets:
+      - "dnf5 -y config-manager enable adoptium-temurin-java-repository terra terra-extras terra-mesa"
+
   - type: dnf
     repos:
       files:
@@ -44,10 +48,10 @@ modules:
         - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
         - https://raw.githubusercontent.com/albersonmiranda/r_tools_ppa/refs/heads/main/rpm/x86_64/repo.txt
         - https://www.scootersoftware.com/scootersoftware.repo
-        - https://src.fedoraproject.org/rpms/adoptium-temurin-java-repository/raw/f%OS_VERSION%/f/adoptium-temurin-java-repository.repo
       nonfree: rpmfusion
       copr:
         - cuteneko/waydroid-helper
+      # - faugus/faugus-launcher
     remove:
       packages:
         - Sunshine
@@ -60,6 +64,7 @@ modules:
       packages:
         - gamescope
         - scopebuddy
+      # - faugus-launcher
 
         - temurin-25-jdk
         - micro
@@ -115,6 +120,7 @@ modules:
       - bcompare.sh
       - customization.sh
     snippets:
+      - "dnf5 -y config-manager disable virtio-win-stable virtio-win-latest virtio-win-source home_mkittler scootersoftware r_tools_ppa" # copr:copr.fedorainfracloud.org:faugus:faugus-launcher
       - "dnf5 -y remove nohang-nightly-desktop"
       - "dnf5 -y install --skip-unavailable nohang-nightly-desktop"
 
