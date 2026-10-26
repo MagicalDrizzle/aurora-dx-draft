@@ -87,9 +87,7 @@ modules:
 
         - bcompare
         - rstudio
-        # Remember to delete when merged
-        - nohang
-        - nohang-desktop
+        - nohang-nightly
 
         - gsmartcontrol
         - btrfs-heatmap
