@@ -17,20 +17,30 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  - type: script
-    snippets:
-      - "dnf5 -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release terra-gpg-keys"
-
   - type: dnf
+    repos:
+      files:
+        - https://raw.githubusercontent.com/terrapkg/packages/f%OS_VERSION%/anda/terra/release/terra.repo
     install:
+      no-gpgchecks: true
       packages:
         - terra-release
         - terra-release-extras
         - terra-release-mesa
+
+  - type: dnf
+    install:
+      packages:
+        - terra-gpg-keys
         - adoptium-temurin-java-repository
 
   - type: dnf
     repos:
+      add:
+        - fedora-cisco-openh264
+        - terra
+        - terra-extras
+        - terra-mesa
       files:
         - https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
         - https://download.opensuse.org/repositories/home:mkittler/Fedora_%OS_VERSION%/home:mkittler.repo
