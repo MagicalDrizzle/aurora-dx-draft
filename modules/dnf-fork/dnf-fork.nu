@@ -323,10 +323,9 @@ def enable_repos [$repos: list]: nothing -> nothing {
               text: 'Found in config'
             }
           })
-          $repo
       }
     }
-    dnf config-manager enable $repos
+    dnf config-manager enable ...$repos
   }
 }
 
@@ -345,7 +344,7 @@ def disable_repos [$repos: list]: nothing -> nothing {
         print $'- (ansi cyan)($in)(ansi reset)'
       }
 
-    dnf config-manager disable $repos
+    dnf config-manager disable ...$repos
   }
 }
 
